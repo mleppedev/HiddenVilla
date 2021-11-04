@@ -12,6 +12,7 @@
 
                 @room.RoomName<br />
                 @room.Price.ToString("c")<br />
+                @*al iniciar se verifica el estado del checkbox*@
                 <input type="checkbox" @bind-value="room.IsActive" checked="@(room.IsActive?"checked":null)" /> &nbsp; Is Active<br />
                 <span>This room is @(room.IsActive?"Actice":"InActive")</span>
                 @if (room.IsActive)
@@ -21,8 +22,9 @@
                         <p>@roomProp.Name - @roomProp.Value</p>
                     }
                 }<br />
-                <input type="button" class="btn btn-danger" value="Delete" />
-                <input type="button" class="btn btn-success" value="Edit" />
+
+                @*paso true a la validacion de administrador para mostrar los botones*@
+                <EditDeleteButton IsAdmin="true" />
             </div>
         }
     </div>
@@ -31,6 +33,7 @@
 @code {
     List<BlazorRoom> RoomsList = new List<BlazorRoom>();
 
+    //al inicializar crear 2 habitaciones en RoomsList
     protected override void OnInitialized()
     {
         base.OnInitialized();

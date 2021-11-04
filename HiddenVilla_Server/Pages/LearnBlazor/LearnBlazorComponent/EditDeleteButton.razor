@@ -1,0 +1,13 @@
+﻿@*verifico si es admin para mostrar botones*@
+@if (IsAdmin)
+{
+    <input type="button" class="btn btn-danger" value="Delete" />
+    <input type="button" class="btn btn-success" value="Edit" />
+}
+
+@code{
+    //When annotating properties in a Blazor Component with [Parameter], it allows us to handle incoming parameters with ease
+    //https://www.c-sharpcorner.com/article/parameters-in-blazor-server-deep-dive/
+    [Parameter]
+    public bool IsAdmin { get; set; }
+}
