@@ -2,7 +2,8 @@
 
 @*tarea 04 - 04 - creo el componente*@
 @*se mueven las comodidades a su propio componente para poder reutilizarlas*@
-<div class="bg-light border p-2 col-5 offset-1">
+@*Tarea 05 - 06 - agregamos un OnClick al div para pasar el valor al hacer click*@
+<div class="bg-light border p-2 col-5 offset-1" @onclick="(args) => AmenitySelectionChanged(args, Amenity.Name)">
     <h4 class="text-secondary">Amenity - @Amenity.Id</h4>
 
     @Amenity.Name<br />
@@ -12,4 +13,15 @@
 @code {
     [Parameter]
     public BlazorAmenities Amenity { get; set; }
+
+    //Tarea 05 - 04 - EventCallBack para pasar la comodidad desde el parent
+    [Parameter]
+    public EventCallback<string> OnAmenitySelection { get; set; }
+
+    //Tarea 05 - 07 - la idea es pasar el nombre, metodo que tambien sirve para pasar multiples parametros
+    protected async Task AmenitySelectionChanged(MouseEventArgs e, string name)
+    {
+        //pasamos el string
+        await OnAmenitySelection.InvokeAsync((string)name);
+    }
 }

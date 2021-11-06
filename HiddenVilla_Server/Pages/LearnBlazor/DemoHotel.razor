@@ -23,14 +23,24 @@
         @foreach (var amenity in AmenitiesList)
         {
             //para cada habitacion segun el componente IndividualRoom
-            <IndividualAmenity Amenity="@amenity" />
+            //Tarea 05 - 05 - pasamos el EventCallback
+            <IndividualAmenity OnAmenitySelection="AmenitySelectionCounterChanged" Amenity="@amenity" />
         }
     </div>
+
+    @*Tarea 05 - 02 - div para mostrar la comodidad seleccionada*@
+    <div class="col-12">
+        <p class="text-secondary">Selected Amenity : @SelectedAmenity</p>
+    </div>
 </div>
+
+
 
 @code {
     //creamos esta propiedad para sumar las habitaciones seleccionadas
     public int SelectedRooms { get; set; } = 0;
+    //Tarea 05 - 01 - creamos la comodidad que sera mostrada
+    public string SelectedAmenity { get; set; } = "";
 
     List<BlazorRoom> RoomsList = new List<BlazorRoom>();
     //tarea 04 - 02 - se crea la lista de comodidaes
@@ -87,5 +97,11 @@
         {
             SelectedRooms--;
         }
+    }
+
+    //Tarea 05 - 03 - pasar el valor de la comodidad
+    protected void AmenitySelectionCounterChanged(string amenity)
+    {
+        SelectedAmenity = amenity;
     }
 }
