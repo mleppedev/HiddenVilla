@@ -7,11 +7,13 @@
     <div class="row container">
         <div class="col-12">
             <h4 class="text-info">Hotel Room's</h4>
+            <span>Rooms Selected - @SelectedRooms</span>
         </div>
         @foreach (var room in RoomsList)
         {
             //para cada habitacion segun el componente IndividualRoom
-            <IndividualRoom Room="@room" />
+            //OnRoomCheckBoxSelection="RoomSelectionCounterChanged" es el parametro que le pasamos al child
+            <IndividualRoom OnRoomCheckBoxSelection="RoomSelectionCounterChanged" Room="@room" />
         }
 
         @*tarea 04 - 05 - hago el recorrido para mostrar todas las comodidades*@
@@ -27,6 +29,9 @@
 </div>
 
 @code {
+    //creamos esta propiedad para sumar las habitaciones seleccionadas
+    public int SelectedRooms { get; set; } = 0;
+
     List<BlazorRoom> RoomsList = new List<BlazorRoom>();
     //tarea 04 - 02 - se crea la lista de comodidaes
     List<BlazorAmenities> AmenitiesList = new List<BlazorAmenities>();
@@ -68,5 +73,19 @@
         AmenitiesList.Add(new BlazorAmenities { Id = 111, Name = "Gym", Description = "24x7 gym room is available." });
         AmenitiesList.Add(new BlazorAmenities { Id = 222, Name = "Swimming Pool", Description = "Pool room is open from 6am to 10pm." });
         AmenitiesList.Add(new BlazorAmenities { Id = 333, Name = "Free Breakfast", Description = "Enjoy free breakfast at our hotel." });
+    }
+
+    //metodo que incrementa o reduce la cantidad de habitaciones seleccionadas
+    //boolean flag para ver si la habitacion esta seleccionada o no
+    protected void RoomSelectionCounterChanged(bool isRoomSelected)
+    {
+        if (isRoomSelected)
+        {
+            SelectedRooms++;
+        }
+        else
+        {
+            SelectedRooms--;
+        }
     }
 }

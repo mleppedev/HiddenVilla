@@ -4,6 +4,7 @@
 <div class="bg-light border p-2 col-5 offset-1">
     <h4 class="text-secondary">Room - @Room.Id</h4>
 
+    <input type="checkbox" @onchange="RoomCheckBoxSelectionChanged" />
     @Room.RoomName<br />
     @Room.Price.ToString("c")<br />
     @*al iniciar se verifica el estado del checkbox*@
@@ -25,4 +26,16 @@
 @code {
     [Parameter]
     public BlazorRoom Room { get; set; }
+
+    //se debe definir explicitamente que es un parametro pasado de un parent component
+    [Parameter]
+    //este EventCallback es necesario para recibir de vuelta el parametro que es pasado desde el parent
+    public EventCallback<bool> OnRoomCheckBoxSelection { get; set; }
+    //la funcion de este metodo es invocar el metodo que se encuentra en el parent component DemoHotel
+    //se utiliza ChangeEventArgs() porque necesitamos pasar el valor decheckbox cada vez que es modificado
+    protected async Task RoomCheckBoxSelectionChanged(ChangeEventArgs e)
+    {
+        //pasamos explicitamente el valor como boolean
+        await OnRoomCheckBoxSelection.InvokeAsync((bool)e.Value);
+    }
 }

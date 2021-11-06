@@ -1,8 +1,24 @@
 Blazor Data Binding : One-way, Two-way and Event Binding
 https://www.dotnettricks.com/learn/blazor/blazor-data-binding-one-way-two-way-and-event-binding
 
+Real-time ASP.NET with SignalR
+https://dotnet.microsoft.com/apps/aspnet/signalr
+
+Lifecycle
+OnInitialized() -> OnInitializedAsync() -> OnParameterSet() -> OnParameterSetAsync() -> 
+OnAfterRender() -> OnAfterRenderAsync() -> ShouldRender() -> StateHasChanged()
+OnInitializedAsync(): idealmente utilizado para llamar servicios para inicializar o cargar datos
+OnParameterSet() -> OnParameterSetAsync(): son llamados cuando un componente es inicializados y se 
+llaman cada vez que se recibe un parametro actualizado en el render tree
+OnAfterRender() -> OnAfterRenderAsync(): se llaman despues de cada render del componente, cuando todos los elementos del componente
+fueron render en el dom, requiere que los elementos del dom esten en su lugar, en otras palabras me sirven para 
+despues de que los elementos del dom fueran rendered
+ShouldRender(): este metodo retorna un boolean, si es verdad refresca la UI, de lo contrario los
+cambios no son enviados a la UI
+StateHasChanged(): este metodo notifica al componente que un estado ha cambiado, se puede llamar manualmente en caso de ser necesario
+
+--------------------------------------------------------------------------------------------------------
 [Parameter]
 https://www.c-sharpcorner.com/article/parameters-in-blazor-server-deep-dive/
 
-Real-time ASP.NET with SignalR
-https://dotnet.microsoft.com/apps/aspnet/signalr
+

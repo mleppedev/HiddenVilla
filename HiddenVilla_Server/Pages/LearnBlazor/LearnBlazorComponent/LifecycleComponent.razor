@@ -1,0 +1,28 @@
+﻿<h3>Lifecycle Child Component</h3>
+
+@foreach (var item in EventType)
+{
+    @item
+    <hr />
+}
+
+@code {
+    [Parameter]
+    //para testear OnParametersSet()
+    public int CountValue { get; set; }
+
+    //creo una lista para agregar los eventos segun el orden en que son llamados
+    List<string> EventType = new List<string>();
+
+    //agregamos el nombre de los eventos a la lista de eventos para ver cual se agrega primero
+    protected override void OnInitialized()
+    {
+        EventType.Add("Child - OnInitialized() is called");
+    }
+
+    //cada vez que en el componente parent el contador cambie se va a pasar el parametro que se pasa al child tambien cambia
+    protected override void OnParametersSet()
+    {
+        EventType.Add("Child - OnParametersSet() is called " + CountValue);
+    }
+}
