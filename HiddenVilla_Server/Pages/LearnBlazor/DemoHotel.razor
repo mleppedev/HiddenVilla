@@ -3,35 +3,33 @@
 
 <h3>We will display hotel rooms and amenities here!</h3>
 <div class="border p-2 mt-2" style="background-color:azure">
-    <h2 class="text-info">Room List [USING COMPONENT]</h2>
+    <h2 class="text-info">Room List [Usando Componentes]</h2>
     <div class="row container">
+        <div class="col-12">
+            <h4 class="text-info">Hotel Room's</h4>
+        </div>
         @foreach (var room in RoomsList)
         {
-            <div class="bg-light border p-2 col-5">
-                <h4 class="text-secondary">Room - @room.Id</h4>
+            //para cada habitacion segun el componente IndividualRoom
+            <IndividualRoom Room="@room" />
+        }
 
-                @room.RoomName<br />
-                @room.Price.ToString("c")<br />
-                @*al iniciar se verifica el estado del checkbox*@
-                <input type="checkbox" @bind-value="room.IsActive" checked="@(room.IsActive?"checked":null)" /> &nbsp; Is Active<br />
-                <span>This room is @(room.IsActive?"Actice":"InActive")</span>
-                @if (room.IsActive)
-                {
-                    @foreach (var roomProp in room.RoomProps)
-                    {
-                        <p>@roomProp.Name - @roomProp.Value</p>
-                    }
-                }<br />
-
-                @*paso true a la validacion de administrador para mostrar los botones*@
-                <EditDeleteButton IsAdmin="true" />
-            </div>
+        @*tarea 04 - 05 - hago el recorrido para mostrar todas las comodidades*@
+        <div class="col-12">
+            <h4 class="text-info">Hotel Amenities [Tarea 04]</h4>
+        </div>
+        @foreach (var amenity in AmenitiesList)
+        {
+            //para cada habitacion segun el componente IndividualRoom
+            <IndividualAmenity Amenity="@amenity" />
         }
     </div>
 </div>
 
 @code {
     List<BlazorRoom> RoomsList = new List<BlazorRoom>();
+    //tarea 04 - 02 - se crea la lista de comodidaes
+    List<BlazorAmenities> AmenitiesList = new List<BlazorAmenities>();
 
     //al inicializar crear 2 habitaciones en RoomsList
     protected override void OnInitialized()
@@ -65,5 +63,10 @@
 
             }
         });
+
+        //tarea 04 - 03 - agregamos la lista de 3 comodidades al inicio
+        AmenitiesList.Add(new BlazorAmenities { Id = 111, Name = "Gym", Description = "24x7 gym room is available." });
+        AmenitiesList.Add(new BlazorAmenities { Id = 222, Name = "Swimming Pool", Description = "Pool room is open from 6am to 10pm." });
+        AmenitiesList.Add(new BlazorAmenities { Id = 333, Name = "Free Breakfast", Description = "Enjoy free breakfast at our hotel." });
     }
 }

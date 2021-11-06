@@ -1,0 +1,28 @@
+﻿@using HiddenVilla_Server.Model
+
+@*se mueven las habitaciones a su propio componente para poder reutilizarlas*@
+<div class="bg-light border p-2 col-5 offset-1">
+    <h4 class="text-secondary">Room - @Room.Id</h4>
+
+    @Room.RoomName<br />
+    @Room.Price.ToString("c")<br />
+    @*al iniciar se verifica el estado del checkbox*@
+    <input type="checkbox" @bind-value="Room.IsActive" checked="@(Room.IsActive?"checked":null)" /> &nbsp; Is Active<br />
+    <span>This room is @(Room.IsActive?"Actice":"InActive")</span>
+    @if (Room.IsActive)
+    {
+        @foreach (var roomProp in Room.RoomProps)
+        {
+            <p>@roomProp.Name - @roomProp.Value</p>
+        }
+    }<br />
+
+    @*A nested hierarchy or inclusion hierarchy is a hierarchical ordering of nested sets.*@
+    @*paso true a la validacion de administrador para mostrar los botones*@
+    <EditDeleteButton IsAdmin="true" />
+</div>
+
+@code {
+    [Parameter]
+    public BlazorRoom Room { get; set; }
+}

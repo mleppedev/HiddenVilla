@@ -1,0 +1,8 @@
+Blazor Data Binding : One-way, Two-way and Event Binding
+https://www.dotnettricks.com/learn/blazor/blazor-data-binding-one-way-two-way-and-event-binding
+
+[Parameter]
+https://www.c-sharpcorner.com/article/parameters-in-blazor-server-deep-dive/
+
+Real-time ASP.NET with SignalR
+https://dotnet.microsoft.com/apps/aspnet/signalr

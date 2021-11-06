@@ -1,0 +1,15 @@
+﻿@using HiddenVilla_Server.Model
+
+@*tarea 04 - 04 - creo el componente*@
+@*se mueven las comodidades a su propio componente para poder reutilizarlas*@
+<div class="bg-light border p-2 col-5 offset-1">
+    <h4 class="text-secondary">Amenity - @Amenity.Id</h4>
+
+    @Amenity.Name<br />
+    @Amenity.Description<br />
+</div>
+
+@code {
+    [Parameter]
+    public BlazorAmenities Amenity { get; set; }
+}
